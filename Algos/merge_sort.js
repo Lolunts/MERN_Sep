@@ -77,14 +77,14 @@ function mergeSort(arr){
     // We can do this in a couple of separate steps, or combine them into one.
 
     // MULTI-STEP APPROACH:
-    /*
-        // make the two recursive calls separately and store the returned arrays into variables
-        let arrLeft = mergeSort(left);
-        let arrRight = mergeSort(right);
+    
+    //     // make the two recursive calls separately and store the returned arrays into variables
+    // let arrLeft = mergeSort(left);
+    // let arrRight = mergeSort(right);
 
-        // and THEN merge them together and return
-        return merge(left, right);
-    */
+    // // and THEN merge them together and return
+    // return merge(arrLeft, arrRight);
+    
     
     // ONE-LINER
     // This will recursively call mergeSort to the left and right subarrays,
