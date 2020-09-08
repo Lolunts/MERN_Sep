@@ -1,34 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import EventCard from './components/EventCard';
 import Form from './components/Form';
 
 function App() {
+  const [allEvents, setAllEvents] = useState([]);
+  const [event, setEvent] = useState({
+      name: '',
+      date: '',
+      guests: 0,
+      description: ''
+  });
+
+  const formSubmit = () => {
+    // Alternative/multi-step method to add to an array in state
+    // let events = allEvents;
+    // events.push(event);
+    // setAllEvents(events);
+    setAllEvents([...allEvents, event]);
+    setEvent({
+      name: '',
+      date: '',
+      guests: 0,
+      description: ''
+    });
+  }
+
+  const guestAdd = i => {
+    const [...events] = allEvents;
+
+    events[i].guests++;
+
+    setAllEvents(events);
+  }
+
   return (
     <>
       <ul>
-        <EventCard 
-          name={"Awesome Sauce Extravaganza"}
-          date={"9/3/2020"} 
-          guests={10}
-          description={"The awesomest of sauce and extravagant"}
-          />
-        <EventCard
-          name="Class components demo"
-          date="9/3/2020"
-          guests={10}
-          description="Learnin' all about dem components"
-          />
-        <EventCard
-          name="Functional Components Demo"
-          date="9/4/2020"
-          guests={2}
-          description="Same as before, but functional"
-          />
+        {
+          allEvents.map((ev, i) => 
+            <EventCard 
+              key={ i }
+              index={ i }
+              event={ ev }
+              guestAdd={ guestAdd }
+            />
+          )
+        }
       </ul>
 
-      <Form/>
+      <Form newEvent={ event } setNewEvent={ setEvent } formSubmit={ formSubmit }/>
     </>
   );
 }

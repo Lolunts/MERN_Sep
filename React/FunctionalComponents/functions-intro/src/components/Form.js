@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import EventCard from './EventCard';
 
 const Form = props => {
+    const { newEvent, setNewEvent, formSubmit } = props;
     // const [event, setEvent] = 
     // const [name, setName] = useState('');
     // const [date, setDate] = useState('');
@@ -9,33 +10,19 @@ const Form = props => {
     // const [description, setDescription] = useState('');
     
     const [submitted, setSubmitted] = useState(false);
-    const [event, setEvent] = useState({
-        name: '',
-        date: '',
-        guests: 0,
-        description: ''
-    });
 
     const changeHandler = e => {
         setSubmitted(false);
 
-        setEvent({
-            ...event,
+        setNewEvent({
+            ...newEvent,
             [e.target.name]: e.target.value
         })
-
-        
     }
 
     const submitHandler = e => {
         e.preventDefault();
-        setEvent({
-            name: '',
-            date: '',
-            guests: 0,
-            description: ''
-        });
-
+        formSubmit();        
         setSubmitted(true);
     }
 
@@ -58,16 +45,16 @@ const Form = props => {
             {/* <EventCard name={event.name} date={event.date} guests={event.guests} description={event.description} /> */}
             <form onSubmit={ submitHandler }>
                 <label htmlFor="name">Name: </label>
-                <input type="text" name="name" onChange={ changeHandler } value={event.name}/>
+                <input type="text" name="name" onChange={ changeHandler } value={newEvent.name}/>
                 <br/>
-                <label htmlFor="name">Date: </label>
-                <input type="text" name="date" onChange={ changeHandler } value={event.date}/>
+                <label htmlFor="date">Date: </label>
+                <input type="text" name="date" onChange={ changeHandler } value={newEvent.date}/>
                 <br/>
-                <label htmlFor="name">Guests: </label>
-                <input type="number" name="guests" onChange={ changeHandler } value={event.guests}/>
+                <label htmlFor="guests">Guests: </label>
+                <input type="number" name="guests" onChange={ changeHandler } value={newEvent.guests}/>
                 <br/>
-                <label htmlFor="name">Description: </label>
-                <input type="text" name="description" onChange={ changeHandler } value={event.description}/>
+                <label htmlFor="description">Description: </label>
+                <input type="text" name="description" onChange={ changeHandler } value={newEvent.description}/>
                 <br/>
                 <input type="submit" value="Submit"/>
             </form>
