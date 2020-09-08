@@ -46,3 +46,5 @@ function partition(arr = [], left = 0, right = arr.length-1){
     // And return the new pivot index.
     return nP;
 }
+
+export default partition;
