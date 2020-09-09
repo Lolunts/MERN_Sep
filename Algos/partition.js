@@ -47,4 +47,4 @@ function partition(arr = [], left = 0, right = arr.length-1){
     return nP;
 }
 
-export default partition;
+module.exports = partition;
