@@ -2,6 +2,7 @@ const faker = require('faker');
 
 class Team {
     constructor(){
+        this._id = faker.random.uuid();
         this.city = faker.address.city();
         this.name = faker.company.bsNoun();
         this.sport = faker.commerce.productName();
