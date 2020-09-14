@@ -17,7 +17,6 @@ const NewThing = () => {
     const submitHandler = e => {
         e.preventDefault();
 
-
         // Step 1: Fire off the post request
         axios.post('http://localhost:8000/api/test', thing)
             .then(response => {
