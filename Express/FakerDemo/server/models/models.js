@@ -20,6 +20,7 @@ class Player {
     }
 }
 
+
 module.exports = {
     Team,
     Player
