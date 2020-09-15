@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const { NestedSchema } = require('./nested.models');
+
+
 
 const TestSchema = new mongoose.Schema({
     name: {
@@ -9,7 +12,8 @@ const TestSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "Email is required."]
-    }
+    }, 
+    reviews: [NestedSchema]
 }, { timestamps: true });
 
 const Test = mongoose.model("Test", TestSchema);

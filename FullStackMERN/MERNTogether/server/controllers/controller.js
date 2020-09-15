@@ -31,9 +31,29 @@ module.exports = {
                 }
             });
     },
+    getOneReview: (req,res) => {
+        Test.findOne({ 'reviews._id': req.params.rId })
+            .then(data => res.json(data.reviews.filter(item => item._id == req.params.rId)[0]))
+            .catch(err => res.json(err));
+    },
     // U
     updateOne: (req, res) => {
-        Test.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true, useFindAndModify: false})
+        Test.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true, new: true})
+            .then(data => res.json(data))
+            .catch(err => res.json(err));
+    },
+    createReview: (req,res) => {
+        Test.findByIdAndUpdate({ _id: req.params.id }, { $addToSet: { reviews: req.body }}, { runValidators: true, new: true })
+            .then(data => res.json(data))
+            .catch(err => res.json(err));
+    },
+    deleteReview: (req,res) => {
+        Test.findOneAndUpdate({ _id: req.params.id }, { $pull: { reviews: { _id: req.params.rId } } }, { new: true })
+            .then(data => res.json(data))
+            .catch(err => res.json(err));
+    },
+    updateReview: (req,res) => {
+        Test.findOneAndUpdate({ 'reviews._id': req.params.rId }, { $set: { 'reviews.$': req.body }}, { new: true, runValidators: true })
             .then(data => res.json(data))
             .catch(err => res.json(err));
     },
@@ -42,5 +62,5 @@ module.exports = {
         Test.findOneAndDelete({ _id: req.params.id })
             .then(data => res.json(data))
             .catch(err => res.json(err));
-    }
+    },
 }
